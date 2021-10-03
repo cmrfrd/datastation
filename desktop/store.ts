@@ -120,8 +120,11 @@ export const storeHandlers = [
       dispatch: Dispatch
     ) => {
       const fileName = await ensureProjectFile(projectId);
-      const f = await fsPromises.readFile(fileName);
-      const existingState = JSON.parse(f.toString());
+      let existingState = new ProjectState();
+      try {
+        const f = await fsPromises.readFile(fileName);
+        existingState = JSON.parse(f.toString());
+      } catch (e) {}
       await encryptProjectSecrets(newState, existingState);
       return writeFileBuffered(fileName, JSON.stringify(newState));
     },

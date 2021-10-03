@@ -52,7 +52,7 @@ export const evalProgramHandler = rpcEvalHandler<
     let pid = 0;
     try {
       const preamble = language.preamble(
-        projectResultsFile,
+        projectResultsFile.replaceAll('\\','/'),
         ppi.id,
         indexIdMap
       );

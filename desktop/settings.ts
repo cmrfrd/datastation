@@ -90,7 +90,7 @@ export class Settings {
   }
 }
 
-export let SETTINGS: Settings = null;
+export let SETTINGS: Settings = new Settings('');
 
 export async function loadSettings(settingsFile?: string): Promise<Settings> {
   if (!settingsFile) {
